@@ -1,1 +1,2 @@
 examples/MNIST_data
+*.pyc

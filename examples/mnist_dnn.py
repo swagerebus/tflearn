@@ -2,15 +2,18 @@ import os
 import sys
 import logging
 
-module_path = os.path.join(os.getcwd(), "../..")
+module_path = os.path.join(os.getcwd(), "../../")
 sys.path.append(module_path)
 
-from tflearn import DNNClassifier
+import tflearn
 from tensorflow.examples.tutorials.mnist import input_data
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s: %(message)s', stream=sys.stdout)
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-model = DNNClassifier(784, [300], 10, learn_rate=0.001)
+
+
+optimizer = tflearn.Optimizer('adam', learn_rate=0.001)
+model = tflearn.DNNClassifier([784, 300, 10], optimizer=optimizer)
 
 for step in xrange(0, 3000):
     step += 1
